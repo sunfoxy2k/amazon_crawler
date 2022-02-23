@@ -4,5 +4,4 @@ __pycache__/
 venv
 *.jsonlines
 *.ndjson
-*.txt
 *.ipynb
