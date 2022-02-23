@@ -6,13 +6,13 @@ class AmazonCommentSpider(scrapy.Spider):
     name = 'amazon_comment'
     allowed_domains = ['amazon.com']
     custom_settings = {
-        'DEPTH_LIMIT': 0,
+        'DEPTH_LIMIT': 1,
         'ITEM_PIPELINES': {
             'amazon.pipelines.MongoPipeline': 900
         }
     }
 
-    def __init__(self,**kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
         with open('comment_url.txt', 'r') as file:
             self.start_urls = file.readlines()
@@ -33,17 +33,22 @@ class AmazonCommentSpider(scrapy.Spider):
 
         reviewer = review.css('span.a-profile-name::text').get()
         rating = review.css('.a-icon-alt::text').get()[0]
+        helpful = review.css('span.a-size-base.a-color-tertiary.cr-vote-text::text').get()
+        if helpful:
+            helpful = helpful.split(' people')[0]
 
         return {
             'asin': asin,
             'summary': summary,
             'content': content,
             'reviewer': reviewer,
-            'rating': rating
+            'rating': rating,
+            'helpful': helpful,
         }
 
     def parse(self, response, **kwargs):
         asin = response.url.split('/product-reviews/')[1].split('/')[0]
+
         for review in response.css('.review-views.celwidget div.review>div.a-row'):
             yield self.process_review(review, asin)
 

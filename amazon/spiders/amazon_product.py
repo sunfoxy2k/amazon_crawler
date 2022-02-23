@@ -41,7 +41,7 @@ def parse_product(response):
         'brand': brand,
         'feature': feature,
         'price': price,
-        'comment_url': all_comments
+        'comment_url': all_comments,
     }
 
 

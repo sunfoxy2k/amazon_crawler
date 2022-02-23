@@ -7,7 +7,7 @@ class ProductSpider(scrapy.Spider):
     name = 'product_list'
     allowed_domains = ['amazon.com']
     custom_settings = {
-        'DEPTH_LIMIT': 2,
+        'DEPTH_LIMIT': 3,
         'ITEM_PIPELINES': {
             'amazon.pipelines.ProductPipeline' : 100,
             'amazon.pipelines.CommentFilePipeline': 300,
