@@ -83,5 +83,9 @@ DEFAULT_REQUEST_HEADERS = {
 DEPTH_LIMIT = 10
 
 DOWNLOAD_DELAY = 1
+
+# MONGO_URI = 'mongodb+srv://user123:SeI2ohNoUt7CzT4u@mycluster.gvuyo.mongodb.net'
+# MONGO_DATABASE = 'PROJECT'
+
 MONGO_URI = 'mongodb+srv://user:uzrJlKmF3AugY6dG@cluster0.770v5.mongodb.net'
 MONGO_DATABASE = 'AMAZON'

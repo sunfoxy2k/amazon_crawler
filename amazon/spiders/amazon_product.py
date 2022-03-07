@@ -13,6 +13,17 @@ def parse_product(response):
     category = response.css(
         '.a-unordered-list.a-horizontal.a-size-small li>span>a::text').getall()
     category = [val.strip() for val in category]
+    category = category[-1] if len(category) > 0 else ''
+
+    total_rating = response.css(
+        '.averageStarRatingNumerical .a-color-secondary::text').get().strip().replace(
+        ' global ratings', '')
+
+    total_rating = int(total_rating.replace(',', ''))
+    rating = response.css('#histogramTable.a-align-center tr::attr(aria-label)').getall()
+    rating = [total_rating * int(val[18:].replace('% of rating', '')) // 100 for val in
+              rating]
+
     description = response.css('.aplus-v2.desktop.celwidget').xpath('//p//text()') \
         .getall()
     description = response.css('#productDescription span::text').getall() \
@@ -33,6 +44,10 @@ def parse_product(response):
     feature = response.css(
         'ul.a-unordered-list.a-vertical.a-spacing-mini li>span::text').getall()
     price = response.css('.apexPriceToPay > span:nth-child(2)::text').get()
+    if price is not None:
+        price = float(price.replace('$', ''))
+
+    print(asin)
     return {
         'asin': asin,
         'category': category,
@@ -42,6 +57,11 @@ def parse_product(response):
         'feature': feature,
         'price': price,
         'comment_url': all_comments,
+        'stars_5': rating[0],
+        'stars_4': rating[1],
+        'stars_3': rating[2],
+        'stars_2': rating[3],
+        'stars_1': rating[4],
     }
 
 
@@ -55,10 +75,11 @@ class AmazonProductSpider(scrapy.Spider):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, limit, urls, **kwargs):
+        self.custom_settings['DEPTH_LIMIT'] = limit
+        self.start_urls = urls
+
         super().__init__(**kwargs)
-        with open('product_url.txt', 'r') as file:
-            self.start_urls = file.readlines()
 
     def parse(self, response, **kwargs):
         return parse_product(response)

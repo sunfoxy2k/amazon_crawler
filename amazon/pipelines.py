@@ -61,7 +61,7 @@ class MongoPipeline:
         self.client.close()
 
     def process_item(self, item, spider):
-        collection_name = 'review' if spider.name == 'amazon_comment' else 'products'
+        collection_name = 'reviews' if spider.name == 'amazon_comment' else 'products'
 
         self.db[collection_name].insert_one(ItemAdapter(item).asdict())
         return item

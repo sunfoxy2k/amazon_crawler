@@ -7,7 +7,7 @@ class ProductSpider(scrapy.Spider):
     name = 'product_list'
     allowed_domains = ['amazon.com']
     custom_settings = {
-        'DEPTH_LIMIT': 10,
+        # 'DEPTH_LIMIT': 20,
         'ITEM_PIPELINES': {
             'amazon.pipelines.ProductPipeline' : 100,
             'amazon.pipelines.CommentFilePipeline': 300,
@@ -15,10 +15,11 @@ class ProductSpider(scrapy.Spider):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, limit, urls, **kwargs):
+        self.custom_settings['DEPTH_LIMIT'] = limit
+        self.start_urls = urls
+
         super().__init__(**kwargs)
-        with open('category_list_url.txt', 'r') as file:
-            self.start_urls = file.readlines()
 
     def parse(self, response, **kwargs):
         product_selector = \

@@ -29,3 +29,8 @@ Twisted==21.7.0
 typing-extensions==4.1.1
 w3lib==1.22.0
 zope.interface==5.4.0
+
+plotly~=5.6.0
+pandas~=1.4.1
+dash~=2.2.0
+scrapyscript~=1.1.5

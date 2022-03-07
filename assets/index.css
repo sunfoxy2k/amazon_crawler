@@ -1,0 +1,141 @@
+:root {
+    --content-background: white;
+    --page-background: #f2f2f2;
+    --border: #e2e2e2;
+    --text: #606060;
+    --accent: #1f78b4;
+    --font-text: 'Open Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+.upload_box {
+    color: var(--accent);
+    width: 90%;
+    height: 3em;
+    line-height: 3em;
+    border-width: 1px;
+    border-radius: 0.3em;
+    text-align: center;
+    border-style: dashed;
+    margin-inline: auto;
+}
+
+body {
+    font-family: var(--font-text);
+    color: var(--text);
+    background-color: var(--page-background);
+    margin: 0;
+}
+
+.page_content {
+    grid-template: auto 1fr/ 20em 1fr;
+    display: grid;
+    max-width: 100vw;
+    grid-gap: 1em;
+}
+
+.left_side {
+    grid-column: 1/2;
+    background-color: white;
+    margin-left: 1em;
+    position: relative;
+    padding: 1em;
+}
+
+.left_side h2 {
+    color: black;
+    margin: 0;
+}
+
+.left_side__content {
+    position: sticky;
+    top: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.right_side {
+    display: flex;
+    flex-direction: column;
+    gap: 2em
+}
+
+.crawl_btn {
+    background-color: #FF9900;
+    margin-inline: 2em;
+    padding: 1em;
+    text-transform: uppercase;
+    color: black;
+    font-weight: 900;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 0.3em;
+    grid-column: 1 / 3;
+    background-color: var(--content-background);
+}
+
+header > .icon {
+    width: 3em;
+    height: auto;
+}
+
+header > h1 {
+    font-size: 2.24em;
+    font-weight: 900;
+    margin: 0 0.5em;
+}
+
+.general_information {
+    display: flex;
+    justify-content: space-between;
+}
+
+.general_information__item {
+    background-color: var(--content-background);
+    padding: 1em;
+}
+
+.general_information__item .value {
+    font-size: 2em;
+}
+
+.general_information__item .label {
+    font-size: 0.8em;
+    font-weight: 400;
+}
+
+.content_box {
+    background-color: white;
+    padding: 1em;
+}
+
+.content_box__header {
+    display: flex;
+    align-items: center;
+}
+.content_box__header > .slider {
+    flex: 1;
+    padding: 1em 1em !important;
+}
+
+.content_box__header.compare_brand {
+    justify-content: space-between;
+}
+
+.compare_brand> div:nth-child(2) {
+    width: 15em;
+}
+
+.content_box__body--category {
+    display: flex;
+    align-items: center;
+}
+
+.content_box--table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
